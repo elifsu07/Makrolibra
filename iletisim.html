@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İletişim | Makro Libra</title>
+  <style>
+    :root {
+      --primary-teal: #20c997; /* Örnek teal rengi */
+      --dark-panel: #1a1a1a;
+      --text-gray: #a0a0a0;
+      --transition: all 0.3s ease;
+    }
+
+    body { font-family: 'Inter', sans-serif; background-color: #0f0f0f; color: white; margin: 0; }
+
+    /* Modern İletişim Kartı Stil */
+    .contact-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 30px;
+      border-radius: 20px;
+      transition: var(--transition);
+    }
+
+    .contact-card:hover {
+      border-color: var(--primary-teal);
+      transform: translateY(-5px);
+    }
+
+    .email-link {
+      color: var(--primary-teal);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition);
+    }
+
+    .email-link:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    /* Modern Form Alanları */
+    .custom-field {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 12px;
+      color: white;
+      outline: none;
+      transition: var(--transition);
+      box-sizing: border-box;
+    }
+
+    .custom-field:focus {
+      border-color: var(--primary-teal);
+      background: rgba(32, 201, 151, 0.05);
+    }
+
+    .btn-main {
+      background: var(--primary-teal);
+      color: #000;
+      border: none;
+      border-radius: 12px;
+      letter-spacing: 1px;
+      transition: var(--transition);
+      text-transform: uppercase;
+    }
+
+    .btn-main:hover {
+      background: #1bb186;
+      transform: scale(1.02);
+      box-shadow: 0 10px 20px rgba(32, 201, 151, 0.2);
+    }
+
+    label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: var(--text-gray); }
+  </style>
+</head>
+<body>
+
+<header class="top-nav" style="background: var(--dark-panel); padding: 20px 10%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <a href="index.html" class="logo" style="text-decoration: none;">
+    <div style="display: flex; flex-direction: column; line-height: 0.85;">
+      <span style="color: white; font-weight: 900; font-size: 1.8rem; letter-spacing: -1px;">MAKRO</span>
+      <span style="color: var(--primary-teal); font-weight: 300; font-size: 1.4rem; letter-spacing: 5.5px; margin-top: 2px;">LIBRA</span>
+    </div>
+  </a>
+  <nav class="nav-links" style="display: flex; gap: 20px;">
+    <a href="bki.html" style="color: white; text-decoration: none; opacity: 0.9;">BKİ</a>
+    <a href="besin.html" style="color: white; text-decoration: none; opacity: 0.9;">Besin</a>
+    <a href="kalori.html" style="color: white; text-decoration: none; opacity: 0.9;">Kalori</a>
+    <a href="iletisim.html" style="color: var(--primary-teal); text-decoration: none; font-weight: bold;">İletişim</a>
+  </nav>
+</header>
+
+<main class="main-container" style="max-width: 1100px; margin: 80px auto; padding: 0 20px;">
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 60px; align-items: start;">
+    
+    <div class="contact-card">
+      <h2 style="color: var(--primary-teal); margin-top: 0; font-size: 2rem;">Bize Ulaşın</h2>
+      <p style="color: var(--text-gray); line-height: 1.6;">Sorularınız veya geri bildirimleriniz için aşağıdaki kanalları kullanabilirsiniz.</p>
+      
+      <div style="margin-top: 40px;">
+        <h3 style="font-size: 0.9rem; text-transform: uppercase; color: var(--text-gray); letter-spacing: 1px;">Resmi E-posta</h3>
+        <a href="mailto:makrolibra.iletisim@gmail.com" class="email-link">
+          makrolibra.iletisim@gmail.com
+        </a>
+      </div>
+      
+      <div style="margin-top: 30px;">
+        <h3 style="font-size: 0.9rem; text-transform: uppercase; color: var(--text-gray); letter-spacing: 1px;">Konum</h3>
+        <p style="margin-top: 5px; font-size: 1.1rem;">Yenimahalle, ANKARA</p>
+      </div>
+    </div>
+
+    <form action="https://formspree.io/f/mwvngjgl" method="POST" style="display: flex; flex-direction: column; gap: 20px;">
+      <div class="input-group">
+        <label>Ad Soyad</label>
+        <input type="text" name="name" class="custom-field" placeholder="Adınız Soyadınız" required>
+      </div>
+      
+      <div class="input-group">
+        <label>E-posta</label>
+        <input type="email" name="email" class="custom-field" placeholder="E-posta adresiniz" required>
+      </div>
+      
+      <div class="input-group">
+        <label>Mesajınız</label>
+        <textarea name="message" class="custom-field" rows="5" placeholder="Size nasıl yardımcı olabiliriz?" required style="resize: none;"></textarea>
+      </div>
+
+      <button type="submit" class="btn-main" style="padding: 18px; font-weight: 800; cursor: pointer;">MESAJI GÖNDER</button>
+    </form>
+  </div>
+</main>
+
+</body>
+</html>

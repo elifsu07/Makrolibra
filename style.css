@@ -1,0 +1,498 @@
+/* MAKRO LIBRA - Official Stylesheet 2026
+   Modern, Artistic & Performance Focused
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+    /* Renk Paleti */
+    --primary-teal: #00d1b2;
+    --primary-hover: #00bfa5;
+    --dark-panel: #2d3436;
+    --bg-gradient: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+    --card-bg: #ffffff;
+    --text-color: #334155;
+    --header-dark: #0f172a;
+    --input-border: #cbd5e1;
+    --info-card-shadow: rgba(0, 0, 0, 0.08);
+    
+    /* Animasyon ve Geçiş */
+    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Karanlık Mod Desteği */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-gradient: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+        --card-bg: #1e293b;
+        --text-color: #f1f5f9;
+        --header-dark: #4fd1c5;
+        --dark-panel: #0a0f14;
+        --input-border: #475569;
+        --info-card-shadow: rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* 1. RESET & BASE */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* 2. NAVIGATION (Sanatsal Logo Uyumlu) */
+.top-nav {
+    background: var(--dark-panel);
+    padding: 15px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-links { display: flex; align-items: center; gap: 25px; }
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: var(--transition);
+    opacity: 0.9;
+}
+
+.nav-links a:hover { color: var(--primary-teal); opacity: 1; transform: translateY(-2px); }
+
+/* İletişim Butonu Özel Stili */
+.nav-links a[href*="iletisim"] {
+    color: var(--primary-teal) !important;
+    font-weight: 700;
+    border: 2px solid var(--primary-teal);
+    padding: 8px 22px;
+    border-radius: 50px;
+    opacity: 1;
+}
+
+.nav-links a[href*="iletisim"]:hover {
+    background: var(--primary-teal);
+    color: white !important;
+}
+
+/* 3. HERO & SECTIONS (Ana Sayfa) */
+.hero {
+    padding: 120px 10%;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: left;
+    border-bottom: 5px solid var(--primary-teal);
+}
+
+.hero h2 { font-size: 3.5rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1; }
+.hero p { font-size: 1.2rem; margin-bottom: 35px; max-width: 600px; opacity: 0.9; }
+
+/* 4. MAIN CONTAINER (İç Sayfalar) */
+.main-container {
+    max-width: 950px;
+    margin: 60px auto;
+    padding: 50px;
+    background: var(--card-bg);
+    border-radius: 30px;
+    box-shadow: 0 25px 60px var(--info-card-shadow);
+}
+
+h1 { color: var(--header-dark); font-size: 2.5rem; font-weight: 800; margin-bottom: 30px; text-align: center; }
+h2 {
+    color: var(--primary-teal);
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-weight: 800;
+    font-size: 2rem;
+    letter-spacing: -0.5px;
+    
+    /* Yazıyı tam sola yapıştırmaz, kartlarla aynı hizadan başlatır */
+    padding-left: 5px; 
+    border: none; /* Eski boydan boya çizgiyi kaldırıyoruz */
+    
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Yazının altına şık, kısa ve iki renkli artistik bir çizgi */
+h2::after {
+    content: '';
+    width: 100px; /* Çizgi boyu kısa kalsın */
+    height: 4px;
+    /* Teal'den şeffafa doğru giden modern bir geçiş */
+    background: linear-gradient(90deg, var(--primary-teal) 0%, var(--primary-teal) 30%, rgba(0, 209, 178, 0.1) 100%);
+    border-radius: 10px;
+}
+
+
+/* 5. FORMLAR & HESAPLAMA ARAÇLARI */
+.input-group { margin-bottom: 20px; }
+label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem; }
+
+.custom-field, .custom-input, select {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid var(--input-border);
+    border-radius: 14px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+.custom-field:focus, select:focus {
+    border-color: var(--primary-teal);
+    box-shadow: 0 0 0 5px rgba(0, 209, 178, 0.1);
+}
+
+/* Besin Seçim Listesi (Select size="10") */
+#besin {
+    height: 300px;
+    cursor: pointer;
+    overflow-y: auto;
+}
+
+#besin option {
+    padding: 12px;
+    border-radius: 8px;
+    margin: 2px 0;
+}
+
+/* 6. BUTONLAR */
+.btn-main {
+    width: 100%;
+    padding: 18px;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--primary-teal), var(--primary-hover));
+    color: white;
+    font-weight: 800;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 8px 25px rgba(0, 209, 178, 0.3);
+    text-decoration: none !important;
+    border-bottom: none !important;
+}
+
+.btn-main:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 35px rgba(0, 209, 178, 0.4);
+}
+
+.reset-btn {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.reset-btn:hover { background: #ff3333; transform: rotate(-2deg); }
+
+/* 7. KATEGORİ BUTONLARI (Besin Analizi Sayfası) */
+.category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.cat-btn {
+    padding: 12px 22px;
+    border: 2px solid var(--input-border);
+    background: var(--card-bg);
+    color: var(--text-color);
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.cat-btn:hover, .cat-btn.active {
+    background: var(--primary-teal);
+    color: white;
+    border-color: var(--primary-teal);
+    transform: translateY(-3px);
+}
+
+/* 8. BİLGİ KARTLARI (Ana Sayfa Grid) */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 60px 10%;
+}
+
+.info-card {
+    background: var(--card-bg);
+    padding: 40px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 10px 30px var(--info-card-shadow);
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+.info-card:hover {
+    transform: translateY(-12px);
+    border-color: var(--primary-teal);
+    box-shadow: 0 20px 45px rgba(0, 209, 178, 0.15);
+}
+
+.info-card h3 { color: var(--primary-teal); margin-bottom: 15px; font-size: 1.5rem; }
+
+/* 9. SONUÇ TABLOLARI VE ALANLARI */
+.result-display, .result-box {
+    margin-top: 30px;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(0, 209, 178, 0.05);
+    border: 2px dashed var(--primary-teal);
+}
+/* BKİ ve Kalori Sonuç Alanı - Ultra Minimalist */
+.result-display, .result-box {
+    margin-top: 40px;
+    padding: 0; /* İç boşluğu sıfırladık */
+    background: transparent !important; /* Arka planı tamamen kaldırdık */
+    border: none !important; /* Çerçeveyi kaldırdık */
+    box-shadow: none !important; /* Gölgeyi kaldırdık */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Üstteki küçük açıklama yazısı */
+.result-box span, .result-display div:first-child {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-color);
+    opacity: 0.9;
+    margin-bottom: 5px;
+}
+
+/* Ana Rakam (BKİ veya Kalori) */
+#bkiSonuc strong, #toplamCal {
+    font-size: 1.5rem; /* Kocaman ve odak noktası */
+    font-weight: 100;
+    color: var(--primary-teal);
+    line-height: 0.5;
+    margin: 3px 0;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Durum Metni (Normal, Kilolu vb.) */
+#bkiSonuc div:last-child {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--text-color);
+    padding: 8px 20px;
+    background: rgba(0, 209, 178, 0.1); /* Sadece yazının arkasında hafif bir renk hapsi */
+    border-radius: 30px;
+    margin-top: 10px;
+}
+/* 10. RESPONSIVE */
+@media (max-width: 768px) {
+    .top-nav { flex-direction: column; gap: 20px; padding: 20px 5%; }
+    .hero { padding: 80px 5%; text-align: center; }
+    .hero h2 { font-size: 2.2rem; }
+    .main-container { margin: 20px; padding: 25px; }
+    h1 { font-size: 1.8rem; }
+    .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; }
+}
+
+/* 11. YARDIMCI SINIFLAR */
+.back-link {
+    display: inline-block;
+    margin-top: 40px;
+    color: var(--primary-teal);
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.back-link:hover { transform: translateX(-10px); }
+
+/* Hesapla Altı: Premium Dark & Minimalist Görünüm */
+/* Liste Alanını ve Tabloyu Her Zaman Görünür Yap */
+.result-display, #listeAlani {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    background: #ffffff !important;
+}
+
+/* Tablo Satırları Silik Olmasın */
+table tr {
+    opacity: 1 !important;
+    background: #fdfdfd !important;
+    border-bottom: 2px solid #f0f0f0 !important;
+}
+
+/* Yazı Renklerini Koyu ve Net Yap (Silikliği Önler) */
+table td {
+    color: #222 !important; /* Koyu siyah/gri */
+    font-weight: 700 !important; /* Kalın font */
+    padding: 15px 10px !important;
+}
+
+/* Makro Rozetlerini (P, C, Y) Sabit Renkli Yap */
+.badge {
+    opacity: 1 !important;
+    color: white !important;
+    padding: 6px 12px !important;
+    border-radius: 8px !important;
+    display: inline-block !important;
+    font-size: 0.9rem !important;
+}
+
+/* Rozet Renkleri (Görseldeki gibi belirgin) */
+.p-badge { background-color: #e05665 !important; } /* Protein - Kırmızımsı */
+.c-badge { background-color: #58b19f !important; } /* Karbonhidrat - Yeşil */
+.y-badge { background-color: #f3a683 !important; } /* Yağ - Turuncu */
+
+/* Özet Alanı (Koyu Panel) */
+.summary-box {
+    background: #2d3436 !important;
+    padding: 25px !important;
+    border-radius: 15px !important;
+    margin-top: 20px !important;
+}
+
+.total-cal-text {
+    color: #00d1b2 !important;
+    font-size: 2.2rem !important;
+    font-weight: 900 !important;
+}
+@keyframes softFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Giriş alanlarını daha yumuşak yapalım */
+.custom-input {
+    border: 2px solid #f0f0f0 !important;
+    border-radius: 18px !important;
+    background: #fafafa !important;
+    transition: all 0.3s ease;
+}
+
+.custom-input:focus {
+    background: #fff !important;
+    border-color: var(--primary-teal) !important;
+    box-shadow: 0 8px 20px rgba(0, 209, 178, 0.08) !important;
+}
+/* Besin Listesi Konteyneri */
+.custom-besin-selector {
+    height: 250px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    background: #fff;
+    padding: 5px;
+}
+
+/* Her Bir Besin Satırı */
+.besin-item {
+    padding: 12px 15px;
+    margin: 4px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #444;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+/* Fareyle üzerine gelince (Mavi şerit yerine modern teal) */
+.besin-item:hover {
+    background: rgba(0, 209, 178, 0.05);
+    color: var(--primary-teal);
+}
+
+/* Seçildiğinde */
+.besin-item.selected {
+    background: var(--primary-teal) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(0, 209, 178, 0.2);
+}
+
+/* Scrollbar'ı güzelleştir */
+.custom-besin-selector::-webkit-scrollbar { width: 6px; }
+.custom-besin-selector::-webkit-scrollbar-thumb { background: #eee; border-radius: 10px; }
+
+/* Modern Modal Tasarımı */
+#customAlert {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.9); /* Koyu lacivert transparan */
+    backdrop-filter: blur(12px); /* Arka planı bulanıklaştırır */
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 30px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    border: 1px solid rgba(0, 209, 178, 0.2);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    transform: translateY(0);
+    animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: inline-block;
+    background: rgba(0, 209, 178, 0.1);
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 50%;
+}
+
+.modal-text {
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }

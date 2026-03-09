@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium'a Yükselt | Makro Libra</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .pricing-container {
+            max-width: 900px;
+            margin: 50px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .premium-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+            border: 1px solid rgba(0, 209, 178, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 500px;
+        }
+        .price-tag {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary-teal);
+            margin: 20px 0;
+        }
+        .price-tag span { font-size: 1rem; color: white; opacity: 0.6; }
+        
+        .payment-methods {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .pay-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: left;
+            transition: 0.3s;
+        }
+        .pay-box:hover { border-color: var(--primary-teal); background: rgba(0, 209, 178, 0.05); }
+        .copy-btn {
+            float: right;
+            background: var(--primary-teal);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.7rem;
+        }
+    </style>
+</head>
+<body>
+
+<main class="main-container">
+    <div class="pricing-container">
+        <div class="premium-card">
+            <span style="font-size: 3rem;">💎</span>
+            <h2 style="color: white; margin-top: 10px;">Makro Libra Premium</h2>
+            <p style="opacity: 0.9;">Verilerini buluta yedekle, gelişimini grafiklerle takip et.</p>
+            
+            <div class="price-tag">10₺ <span>/ aylık</span></div>
+
+            <ul style="list-style: none; text-align: left; margin: 25px 0; padding: 0; color: #ddd; font-size: 0.9rem; opacity: 1;">
+                <li style="margin-bottom: 10px;">✅ Sınırsız Günlük Veri Arşivleme</li>
+                <li style="margin-bottom: 10px;">✅ Detaylı Makro İlerleme Grafikleri</li>
+                <li style="margin-bottom: 10px;">✅ Kişiye Özel Kalori Hedef Takibi</li>
+                <li>✅ Reklamsız ve Hızlı Deneyim</li>
+            </ul>
+<div class="payment-methods">
+    <div class="pay-box" style="border-color: var(--primary-teal); background: rgba(0, 209, 178, 0.05);">
+        <small style="color: #2ecc71; font-weight: bold;">💳 KREDİ / BANKA KARTI (PayTR)</small>
+        <div id="paytr_checkout_area" style="margin-top: 10px;">
+            <button onclick="paytrSimulasyon()" class="btn-main" style="width: 100%; background: #2ecc71; border: none; padding: 12px; border-radius: 10px; color: white; cursor: pointer; font-weight: bold;">
+                GÜVENLİ ÖDEME YAP
+            </button>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin: 10px 0; opacity: 0.5; font-size: 0.8rem;">— VEYA —</div>
+
+    <div class="pay-box">
+        <small style="color: var(--primary-teal); font-weight: bold;">BANKA TRANSFERİ (IBAN)</small>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('TR00 0000 0000 0000 0000 0000 00')">Kopyala</button>
+        <div style="color: white; margin-top: 5px; font-family: monospace;">TR00 0000 ... 0000</div>
+        <small style="opacity: 0.8;">Alıcı: Elif Su / Makro Libra</small>
+    </div>
+
+    <div class="pay-box">
+        <small style="color: #ed1c24; font-weight: bold;">PAPARA</small>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('1234567890')">Kopyala</button>
+        <div style="color: white; margin-top: 5px;">Hesap No: 1234567890</div>
+    </div>
+
+    <button onclick="odemeOnayla()" class="btn-main" style="width: 100%; margin-top: 15px; opacity: 0.8; font-size: 0.8rem;">
+        IBAN/PAPARA İLE ÖDEDİM, AKTİF ET
+    </button>
+</div>
+        </div>
+        <a href="index.html" class="back-link" style="margin-top: 30px;">← Vazgeç ve Ana Sayfaya Dön</a>
+    </div>
+</main>
+
+<button onclick="odemeOnayla()" class="btn-main" style="width: 100%; margin-top: 20px;">
+    ÖDEMEYİ TAMAMLA VE HESABI AKTİF ET
+</button>
+
+<script>
+function odemeOnayla() {
+    // Firebase yerine yerel kilidi açıyoruz
+    localStorage.setItem('isPremium', 'true'); 
+    alert("💎 Tebrikler! Premium üyeliğiniz aktif edildi. Panele hoş geldiniz.");
+    window.location.href = "dashboard.html"; // Kilit açıldığı için artık girebilir
+}
+</script>

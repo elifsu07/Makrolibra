@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panelim | Makro Libra</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px var(--info-card-shadow);
+      border: 1px solid rgba(0, 209, 178, 0.1);
+    }
+    .progress-circle {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: conic-gradient(var(--primary-teal) 75%, #eee 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .progress-inner {
+      width: 130px;
+      height: 130px;
+      background: var(--card-bg);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-nav">
+    <a href="index.html" class="logo" style="text-decoration: none;">
+      <span style="color: white; font-weight: 900; font-size: 1.5rem;">MAKRO</span>
+      <span style="color: var(--primary-teal); font-weight: 300; font-size: 1.2rem; letter-spacing: 3px;">LIBRA</span>
+    </a>
+    <div style="color: white; font-weight: 600;">Merhaba, <span id="userDisplayName" style="color: var(--primary-teal);">Kullanıcı</span></div>
+  </header>
+
+  <main class="main-container" style="max-width: 1100px;">
+    <h1 style="text-align: left;">Günlük Özet</h1>
+    
+    <div class="dashboard-grid">
+      <div class="stat-card" style="text-align: center;">
+        <div class="progress-circle">
+          <div class="progress-inner">
+            <span style="font-size: 1.5rem; font-weight: 800; color: var(--primary-teal);">1550</span>
+            <small style="opacity: 0.6;">KCAL</small>
+          </div>
+        </div>
+        <p>Günlük Hedef: <strong>2100 kcal</strong></p>
+      </div>
+
+      <div class="stat-card">
+        <h3 style="margin-bottom: 20px; color: var(--primary-teal);">Makro Dengesi</h3>
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+            <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px;">
+                    <span>Protein</span>
+                    <span>95g / 120g</span>
+                </div>
+                <div style="height: 8px; background: #eee; border-radius: 10px; overflow: hidden;">
+                    <div style="width: 79%; height: 100%; background: #e05665;"></div>
+                </div>
+            </div>
+            <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px;">
+                    <span>Karbonhidrat</span>
+                    <span>180g / 250g</span>
+                </div>
+                <div style="height: 8px; background: #eee; border-radius: 10px; overflow: hidden;">
+                    <div style="width: 72%; height: 100%; background: #58b19f;"></div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-card" style="margin-top: 30px;">
+        <h3 style="color: var(--primary-teal); margin-bottom: 20px;">Son Arşivlenenler</h3>
+        <div style="opacity: 0.6; font-style: italic;">Henüz arşivlenmiş veri bulunmuyor.</div>
+    </div>
+  </main>
+<script>
+// 1. GÜVENLİK KONTROLÜ (Sayfa açılır açılmaz - Beklemeden çalışır)
+const premiumDurumu = localStorage.getItem('isPremium');
+const kullaniciAdi = localStorage.getItem('user_name');
+
+if (premiumDurumu !== 'true') {
+    alert("Lütfen devam etmek için abonelik işlemini tamamlayın.");
+    window.location.href = "odeme.html";
+}
+
+// 2. VERİLERİ YÜKLEME
+document.addEventListener('DOMContentLoaded', function() {
+    // A. Kullanıcı İsmi
+    if (document.getElementById('userDisplayName')) {
+        document.getElementById('userDisplayName').innerText = kullaniciAdi || "Kullanıcı";
+    }
+
+    // B. Verileri Hafızadan Çek
+    const alinanKcal = parseInt(localStorage.getItem('bugunAlinanKcal')) || 0;
+    const alinanProtein = parseInt(localStorage.getItem('bugunAlinanProtein')) || 0;
+    const alinanKarbo = parseInt(localStorage.getItem('bugunAlinanKarbo')) || 0;
+    
+    const hedefKcal = 2100; 
+    const hedefProtein = 120;
+    const hedefKarbo = 250;
+
+    // C. Kalori Dairesi Güncelleme
+    const kcalMetni = document.querySelector('.progress-inner span');
+    if(kcalMetni) kcalMetni.innerText = alinanKcal;
+
+    const kcalDairesi = document.querySelector('.progress-circle');
+    if(kcalDairesi) {
+        let kcalOran = Math.min((alinanKcal / hedefKcal) * 100, 100); // 100'ü geçmesin
+        kcalDairesi.style.background = `conic-gradient(var(--primary-teal) ${kcalOran}%, #eee 0)`;
+    }
+
+    // D. Makro Barlarını Güncelleme (Hassas Seçiciler)
+    
+    // Protein Bölümü
+    const proteinRow = document.querySelector('.stat-card:nth-child(2) > div > div:nth-child(1)');
+    if(proteinRow) {
+        proteinRow.querySelector('span:nth-of-type(2)').innerText = `${alinanProtein}g / ${hedefProtein}g`;
+        let pOran = Math.min((alinanProtein / hedefProtein) * 100, 100);
+        proteinRow.querySelector('div > div').style.width = `${pOran}%`;
+    }
+
+    // Karbonhidrat Bölümü
+    const karboRow = document.querySelector('.stat-card:nth-child(2) > div > div:nth-child(2)');
+    if(karboRow) {
+        karboRow.querySelector('span:nth-of-type(2)').innerText = `${alinanKarbo}g / ${hedefKarbo}g`;
+        let kOran = Math.min((alinanKarbo / hedefKarbo) * 100, 100);
+        karboRow.querySelector('div > div').style.width = `${kOran}%`;
+    }
+
+    console.log("Panel verileri başarıyla senkronize edildi.");
+});
+</script>
+</body>
+</html>
+
+
+
+
+  

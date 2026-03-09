@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Günlük Kalori İhtiyacı | FitAnaliz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-nav" style="background: var(--dark-panel); padding: 20px 10%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <a href="index.html" class="logo" style="display: flex; align-items: center; text-decoration: none; gap: 18px;">
+    <svg width="55" height="55" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 25V50" stroke="var(--primary-teal)" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="30" cy="25" r="3.5" stroke="var(--primary-teal)" stroke-width="2"/>
+      <path d="M12 25H48" stroke="white" stroke-width="3" stroke-linecap="round"/>
+      <path d="M22 50H38" stroke="var(--primary-teal)" stroke-width="3" stroke-linecap="round"/>
+      <g opacity="0.9">
+        <rect x="18" y="15" width="4" height="20" rx="1.5" fill="white"/>
+        <rect x="11" y="18" width="3" height="14" rx="1.5" fill="var(--primary-teal)"/>
+      </g>
+      <g opacity="0.9">
+        <rect x="38" y="15" width="4" height="20" rx="1.5" fill="white"/>
+        <rect x="46" y="18" width="3" height="14" rx="1.5" fill="var(--primary-teal)"/>
+      </g>
+    </svg>
+
+    <div style="display: flex; flex-direction: column; line-height: 0.85;">
+      <span style="color: white; font-weight: 900; font-size: 1.8rem; letter-spacing: -1px; font-family: sans-serif;">MAKRO</span>
+      <span style="color: var(--primary-teal); font-weight: 300; font-size: 1.4rem; letter-spacing: 5.5px; margin-top: 2px; font-family: sans-serif;">LIBRA</span>
+    </div>
+  </a>
+
+  <nav class="nav-links" style="display: flex; align-items: center; gap: 20px;">
+    <a href="bki.html" style="color: white; text-decoration: none; font-size: 0.95rem; opacity: 0.8;">BKİ</a>
+    <a href="kalori.html" style="color: white; text-decoration: none; font-size: 0.95rem; opacity: 0.8;">Kalori</a>
+    <a href="besin.html" style="color: white; text-decoration: none; font-size: 0.95rem; opacity: 0.8;">Besin</a>
+    <a href="iletisim.html" style="color: white; text-decoration: none; font-size: 0.95rem; opacity: 0.8;">İletişim</a>
+    <a href="giris.html" style="color: var(--primary-teal); text-decoration: none; font-weight: bold; border: 2px solid var(--primary-teal); padding: 8px 20px; border-radius: 8px; font-size: 0.9rem; transition: 0.3s;" onmouseover="this.style.background='var(--primary-teal)'; this.style.color='white';" onmouseout="this.style.background='transparent'; this.style.color='var(--primary-teal)';">Giriş Yap</a>
+  </nav>
+</header>
+
+  <main class="main-container">
+    <h1>Günlük Kalori İhtiyacı Nasıl Hesaplanır?</h1>
+
+    <p>
+      Günlük kalori ihtiyacı, vücudunuzun mevcut kilonuzu korumak, kilo vermek veya kas kazanmak için gün içinde harcadığı toplam enerji miktarıdır. Bu miktar, <strong>Bazal Metabolizma Hızınız (BMR)</strong> ile <strong>Aktivite Seviyenizin</strong> çarpımıyla belirlenir.
+    </p>
+
+    <h2>1. Bazal Metabolizma Hızı (BMR)</h2>
+    <p>
+      Vücudunuzun hiç hareket etmeden, sadece organlarınızın çalışması ve hayatta kalmanız için ihtiyaç duyduğu minimum enerjidir. Cinsiyet, yaş, boy ve kilo bu değerin en büyük belirleyicileridir.
+    </p>
+
+    
+
+    <h2>2. Aktivite Çarpanı</h2>
+    <p>
+      Gün içindeki hareketliliğiniz toplam ihtiyacı ciddi şekilde değiştirir. FitAnaliz hesaplayıcısı, Harris-Benedict prensiplerine göre şu seviyeleri baz alır:
+    </p>
+    <ul style="list-style: none; padding: 0;">
+      <li style="padding: 10px; border-bottom: 1px solid var(--input-border);">🛋️ <strong>Sedanter:</strong> Masa başı iş, az veya hiç egzersiz.</li>
+      <li style="padding: 10px; border-bottom: 1px solid var(--input-border);">🚶 <strong>Hafif Aktif:</strong> Haftada 1-3 gün hafif spor.</li>
+      <li style="padding: 10px; border-bottom: 1px solid var(--input-border);">🚴 <strong>Orta Aktif:</strong> Haftada 3-5 gün orta yoğunlukta spor.</li>
+      <li style="padding: 10px; border-bottom: 1px solid var(--input-border);">🏋️ <strong>Çok Aktif:</strong> Haftada 6-7 gün ağır spor.</li>
+    </ul>
+
+    <h2>Kilo Hedefine Göre Planlama</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 25px 0;">
+      <div style="background: rgba(0, 209, 178, 0.05); padding: 15px; border-radius: 12px; border: 1px solid var(--primary-teal);">
+        <h3 style="font-size: 1rem; color: var(--primary-teal);">Kilo Verme</h3>
+        <p style="font-size: 0.9rem;">Günlük ihtiyacınızdan 300-500 kcal açık oluşturun.</p>
+      </div>
+      <div style="background: rgba(0, 209, 178, 0.05); padding: 15px; border-radius: 12px; border: 1px solid var(--primary-teal);">
+        <h3 style="font-size: 1rem; color: var(--primary-teal);">Kilo Koruma</h3>
+        <p style="font-size: 0.9rem;">Hesaplanan toplam kalori miktarını tüketin.</p>
+      </div>
+      <div style="background: rgba(0, 209, 178, 0.05); padding: 15px; border-radius: 12px; border: 1px solid var(--primary-teal);">
+        <h3 style="font-size: 1rem; color: var(--primary-teal);">Kas Kazanma</h3>
+        <p style="font-size: 0.9rem;">İhtiyacınıza ek olarak 200-400 kcal fazla tüketin.</p>
+      </div>
+    </div>
+
+    
+
+    <a href="index.html" class="back-link">← Ana Sayfaya Dön</a>
+  </main>
+
+</body>
+</html>

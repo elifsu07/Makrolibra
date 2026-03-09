@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Besin Analizi | FitAnaliz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+  <header class="top-nav" style="background: var(--dark-panel); padding: 20px 10%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <a href="index.html" class="logo" style="display: flex; align-items: center; text-decoration: none; gap: 18px;">
+    <svg width="55" height="55" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 25V50" stroke="var(--primary-teal)" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="30" cy="25" r="3.5" stroke="var(--primary-teal)" stroke-width="2"/>
+      <path d="M12 25H48" stroke="white" stroke-width="3" stroke-linecap="round"/>
+      <path d="M22 50H38" stroke="var(--primary-teal)" stroke-width="3" stroke-linecap="round"/>
+      <g opacity="0.9">
+        <rect x="18" y="15" width="4" height="20" rx="1.5" fill="white"/>
+        <rect x="11" y="18" width="3" height="14" rx="1.5" fill="var(--primary-teal)"/>
+      </g>
+      <g opacity="0.9">
+        <rect x="38" y="15" width="4" height="20" rx="1.5" fill="white"/>
+        <rect x="46" y="18" width="3" height="14" rx="1.5" fill="var(--primary-teal)"/>
+      </g>
+    </svg>
+
+    <div style="display: flex; flex-direction: column; line-height: 0.85;">
+      <span style="color: white; font-weight: 900; font-size: 1.8rem; letter-spacing: -1px; font-family: sans-serif;">MAKRO</span>
+      <span style="color: var(--primary-teal); font-weight: 300; font-size: 1.4rem; letter-spacing: 5.5px; margin-top: 2px; font-family: sans-serif;">LIBRA</span>
+    </div>
+  </a>
+
+  <nav class="nav-links" style="display: flex; align-items: center; gap: 20px;">
+    <a href="bki.html" style="color: white; text-decoration: none; font-size: 0.95rem; opacity: 0.8;">BKİ</a>
+    <a href="kalori.html" style="color: white; text-decoration: none; font-size: 0.95rem; opacity: 0.8;">Kalori</a>
+    <a href="besin.html" style="color: white; text-decoration: none; font-size: 0.95rem; opacity: 0.8;">Besin</a>
+    <a href="iletisim.html" style="color: white; text-decoration: none; font-size: 0.95rem; opacity: 0.8;">İletişim</a>
+    <a href="giris.html" style="color: var(--primary-teal); text-decoration: none; font-weight: bold; border: 2px solid var(--primary-teal); padding: 8px 20px; border-radius: 8px; font-size: 0.9rem; transition: 0.3s;" onmouseover="this.style.background='var(--primary-teal)'; this.style.color='white';" onmouseout="this.style.background='transparent'; this.style.color='var(--primary-teal)';">Giriş Yap</a>
+  </nav>
+</header>
+
+    <main class="main-container">
+        <h1>Besin Analizi</h1>
+        
+        <div class="calculator-box">
+            <div class="category-buttons" id="catGroup">
+                <button onclick="kategoriFiltrele('hepsi', this)" class="cat-btn active">Hepsi</button>
+                <button onclick="kategoriFiltrele('ana_yemek', this)" class="cat-btn">Ana Yemek</button>
+                <button onclick="kategoriFiltrele('corba', this)" class="cat-btn">Çorba</button>
+                <button onclick="kategoriFiltrele('kahvalti', this)" class="cat-btn">Kahvaltı</button>
+                <button onclick="kategoriFiltrele('meyve', this)" class="cat-btn active">Meyve/Sebze</button>
+                <button onclick="kategoriFiltrele('icecek', this)" class="cat-btn">İçecek</button>
+                <button onclick="kategoriFiltrele('tatli', this)" class="cat-btn">Tatlı ve Atıştırmalık</button>
+               
+            </div>
+
+            <div class="input-group">
+                <label>🔍 Besin Ara</label>
+                <input type="text" id="besinSearch" class="custom-field" placeholder="Yemek adı yazın..." onkeyup="besinAra()">
+            </div>
+
+            <div class="input-group">
+                <label>🍎 Besin Seçin</label>
+                <div id="besinListesi" class="custom-besin-selector">
+                    </div>
+                <input type="hidden" id="secilenBesinKey" value="">
+            </div>
+
+            <div class="input-group" style="display: flex; gap: 10px;">
+                <input type="number" id="miktar" class="custom-field" placeholder="Miktar" value="100" style="flex: 2;">
+                <select id="birim" class="custom-field" style="flex: 1.2;">
+                    <option value="gram">Gr / Ml</option>
+                    <option value="adet">Adet</option>
+                </select>
+            </div>
+
+            <button onclick="besinekle()" class="btn-main">LİSTEYE EKLE</button>
+
+            <div id="listeAlani" style="display: none; margin-top: 50px;">
+                <div id="tabloGövdesi"></div>
+
+                <div class="final-summary">
+                    <div class="total-cal-display">
+                        <span id="toplamCal">0</span>
+                        <small>KCAL</small>
+                    </div>
+                    
+                    <div id="toplamMakro" class="makro-summary-row"></div>
+
+                    <div style="text-align: center; margin-top: 40px;">
+                        <div style="text-align: center; margin-top: 20px; display: flex; justify-content: center; gap: 15px;">
+    <div style="text-align: center; margin-top: 30px; display: flex; justify-content: center;">
+    <div style="text-align: center; margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 25px;">
+    
+    <button onclick="ozelAlert('Bu işlem profesyonel abonelik gerektirmektedir. Detaylar için lütfen giriş yapın.')" 
+        style="
+            background: linear-gradient(135deg, rgba(0, 209, 178, 0.1), rgba(0, 209, 178, 0.2));
+            border: 1px solid rgba(0, 209, 178, 0.4);
+            color: var(--primary-teal);
+            cursor: pointer;
+            font-weight: 800;
+            padding: 16px 50px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Inter', sans-serif;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            width: fit-content;
+        "
+        onmouseover="this.style.transform='translateY(-5px) scale(1.05)'; this.style.background='var(--primary-teal)'; this.style.color='white'; this.style.boxShadow='0 15px 30px rgba(0, 209, 178, 0.3)';"
+        onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.background='linear-gradient(135deg, rgba(0, 209, 178, 0.1), rgba(0, 209, 178, 0.2))'; this.style.color='var(--primary-teal)'; this.style.boxShadow='0 10px 20px rgba(0, 0, 0, 0.05)';"
+    >
+        <span style="font-size: 1.2rem;">💎</span> GÜNLÜK VERİLERİ ARŞİVLE
+    </button>
+
+    <button onclick="sifirla()" 
+        style="
+            background: rgba(255, 77, 77, 0.03); 
+            border: 1px solid rgba(255, 77, 77, 0.15); 
+            color: #ff4d4d; 
+            cursor: pointer; 
+            font-weight: 700; 
+            padding: 10px 25px;
+            border-radius: 12px;
+            text-transform: uppercase; 
+            font-size: 0.75rem; 
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Inter', sans-serif;
+            width: fit-content;
+        "
+        onmouseover="this.style.background='rgba(255, 77, 77, 0.08)'; this.style.borderColor='rgba(255, 77, 77, 0.4)';"
+        onmouseout="this.style.background='rgba(255, 77, 77, 0.03)'; this.style.borderColor='rgba(255, 77, 77, 0.15)';"
+    >
+        <span style="font-size: 1rem;">✕</span> LİSTEYİ TEMİZLE
+    </button>
+    
+</div>
+    
+</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    </main>
+
+    <script src="script.js"></script>
+
+    <div id="customAlert">
+        <div class="modal-content">
+            <div class="modal-icon">💎</div>
+            <div class="modal-text" id="alertMessage">
+                Bu özellik profesyonel üyelik gerektirmektedir.
+            </div>
+            <button onclick="alertKapat()" class="btn-main" style="padding: 12px 40px; border:none;">ANLADIM</button>
+            <div style="margin-top: 20px;">
+                <a href="giris.html" style="color: var(--primary-teal); text-decoration: none; font-size: 0.9rem; font-weight: 700; border-bottom: 1px solid var(--primary-teal);">Hemen Üye Ol →</a>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+
+// Örnek: Verileri Firebase'e Kaydetme Fonksiyonu
+function verileriBulutaKaydet(toplamKalori, toplamProtein, toplamKarbonhidrat) {
+    const user = firebase.auth().currentUser;
+    if (user) {
+        db.collection("users").doc(user.uid).update({
+            bugunAlinan: toplamKalori,
+            proteinAlinan: toplamProtein,
+            karbonhidratAlinan: toplamKarbonhidrat
+        }).then(() => {
+            console.log("Veriler başarıyla güncellendi!");
+        });
+    }
+}
+// Arşivleme fonksiyonunu güncelle
+function arsivle() {
+    const user = firebase.auth().currentUser;
+    
+    if (!user) {
+        alert("Lütfen önce giriş yapın!");
+        return;
+    }
+
+    // Mevcut sayfadaki toplam değerleri al (senin değişken isimlerine göre güncelle)
+    const toplamKcal = parseInt(document.getElementById('toplam-kalori').innerText);
+    const toplamProtein = parseInt(document.getElementById('toplam-protein').innerText);
+    const toplamKarbo = parseInt(document.getElementById('toplam-karbo').innerText);
+
+    // Firebase'e yaz
+    db.collection("users").doc(user.uid).update({
+        bugunAlinan: toplamKcal,
+        proteinAlinan: toplamProtein,
+        karbonhidratAlinan: toplamKarbo,
+        sonArsivleme: firebase.firestore.FieldValue.serverTimestamp()
+    })
+    .then(() => {
+        // Başarı mesajı ve yönlendirme
+        alert("Veriler başarıyla buluta yedeklendi! Panelinize yönlendiriliyorsunuz.");
+        window.location.href = "dashboard.html";
+          })
+    .catch((error) => {
+        console.error("Hata oluştu: ", error);
+        alert("Bir hata oluştu, lütfen tekrar deneyin.");
+    });
+}
+// Butona tıklandığında çalışacak kontrol
+function premiumKontrol() {
+    const user = firebase.auth().currentUser;
+    
+    db.collection("users").doc(user.uid).get().then((doc) => {
+        if (doc.exists && doc.data().isPremium === true) {
+            // Eğer premium ise veriyi kaydet
+            arsivle();
+        } else {
+            // Değilse o hazırladığımız şık uyarıyı göster
+            ozelAlert('Bu özellik profesyonel abonelik gerektirmektedir. Hemen 10 TL\'ye Premium\'a geçin!');
+        }
+    });
+}
+// besin.html içindeki toplamları güncelleyen fonksiyonun sonuna ekle
+function dashboardVerileriniGuncelle() {
+    const toplamKcal = document.getElementById('toplamCal').innerText;
+    // Makro değerlerini de seçicilerine göre al (Örn: toplamProtein id'li elementin varsa)
+    const toplamProtein = document.getElementById('toplamProtein')?.innerText || "0";
+    const toplamKarbo = document.getElementById('toplamKarbo')?.innerText || "0";
+
+    localStorage.setItem('bugunAlinanKcal', toplamKcal);
+    localStorage.setItem('bugunAlinanProtein', toplamProtein);
+    localStorage.setItem('bugunAlinanKarbo', toplamKarbo);
+}
+</script>
+
+</body>
+</html>
+</div>
+</body>
+</html>
